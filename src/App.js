@@ -1,63 +1,50 @@
 import { useState } from "react";
-function App() {
-  const [restaurantName, setRestaurantName] =  useState("Lemon")
-  const [greetings, setGreetings] = useState("Hello, World!");
-  const [menu, setMenu] = useState("Loading...")
-  const [bot, setBot] = useState({answer1:"We are currently on holiday!"});
-  const [help, setHelp] = useState({
-    response1:"We are here to help!",
-    response2: "Kindly Register with us today!!!"
-  })
-  const [order, setOrder] = useState({
-    order1: "Chocolate Cake",
-    order2: "Ice Cream"
-  })
 
-function updateRestaurantName () {
-  setRestaurantName("Little lemon")
-}
-function updateGreetings () {
-  setGreetings("Welcome to Little Lemon! Our most modern restaurant!")
-}
+export default function App() {
+  const [giftCard, setGiftCard] = useState(
+    {
+        firstName: "Jennifer",
+        lastName: "Smith",
+        text: "Free dinner for 4 guests",
+        valid: true,
+        instructions: "To use your coupon, click the button below.",
+    }
+  );
 
-function updateMenu () {
-  setMenu("Hi! Chill and enjoy coffee as we work on it!")
-}
+  function spendGiftCard() {
+    setGiftCard(prevState => {
 
-function updateBot () {
-  const newBot = {...bot};
-  newBot.answer1 = "Come back 5minutes later!";
-  setBot(newBot); 
+      return {
+        ...prevState,
+        text: "Your coupon has been used.",
+        valid: false,
+        instructions: "Please visit our restaurant to renew your gift card.."
+      }
+    });
 
-}
+  }
 
-function updateHelp() {
-  setHelp(prevState => {
-    return{...prevState, response2: "Kindly Login to continue!!!"};
-  })
-}
-
-function updateOrder () {
-  setOrder(prevState => {
-    return{...prevState, order2: "Tiramisu"};
-  })
-}
   return (
-    <div>
-          <h1>{restaurantName}</h1>
-          <button onClick={updateRestaurantName}>Updated Restaurant Name</button>
-          <h1>{greetings}</h1>
-          <button onClick={updateGreetings}>Learn more</button>
-          <h1>{menu}</h1>
-          <button onClick={updateMenu}>Checkout our Menu!!!</button>
-          <h1>{bot.answer1}</h1>
-          <button onClick={updateBot}>Chat With Us!!</button>
-          <h1>{help.response1} {help.response2}</h1>
-          <button onClick={updateHelp}>!!! HELP !!!</button>
-          <h1>{order.order1}, {order.order2}</h1>
-          <button onClick={updateOrder}>Review possible orders for today</button>
+    <div style={{padding: '40px'}}>
+      <h1>
+        Gift Card Page
+      </h1>
+      <h2>
+        Customer: {giftCard.firstName} {giftCard.lastName}
+      </h2>
+      <h3>
+        {giftCard.text}
+      </h3>
+      <p>
+        {giftCard.instructions}
+      </p>
+      {
+        giftCard.valid && (
+          <button onClick={spendGiftCard}>
+            Spend Gift Card
+          </button>
+        )
+      }
     </div>
   );
 }
-
-export default App;
