@@ -3,8 +3,15 @@ function App() {
   const [restaurantName, setRestaurantName] =  useState("Lemon")
   const [greetings, setGreetings] = useState("Hello, World!");
   const [menu, setMenu] = useState("Loading...")
-  // console.log(restaurantName)
   const [bot, setBot] = useState({answer1:"We are currently on holiday!"});
+  const [help, setHelp] = useState({
+    response1:"We are here to help!",
+    response2: "Kindly Register with us today!!!"
+  })
+  const [order, setOrder] = useState({
+    order1: "Chocolate Cake",
+    order2: "Ice Cream"
+  })
 
 function updateRestaurantName () {
   setRestaurantName("Little lemon")
@@ -23,6 +30,18 @@ function updateBot () {
   setBot(newBot); 
 
 }
+
+function updateHelp() {
+  setHelp(prevState => {
+    return{...prevState, response2: "Kindly Login to continue!!!"};
+  })
+}
+
+function updateOrder () {
+  setOrder(prevState => {
+    return{...prevState, order2: "Tiramisu"};
+  })
+}
   return (
     <div>
           <h1>{restaurantName}</h1>
@@ -33,6 +52,10 @@ function updateBot () {
           <button onClick={updateMenu}>Checkout our Menu!!!</button>
           <h1>{bot.answer1}</h1>
           <button onClick={updateBot}>Chat With Us!!</button>
+          <h1>{help.response1} {help.response2}</h1>
+          <button onClick={updateHelp}>!!! HELP !!!</button>
+          <h1>{order.order1}, {order.order2}</h1>
+          <button onClick={updateOrder}>Review possible orders for today</button>
     </div>
   );
 }
