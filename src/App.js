@@ -4,6 +4,7 @@ function App() {
   const [greetings, setGreetings] = useState("Hello, World!");
   const [menu, setMenu] = useState("Loading...")
   // console.log(restaurantName)
+  const [bot, setBot] = useState({answer1:"We are currently on holiday!"});
 
 function updateRestaurantName () {
   setRestaurantName("Little lemon")
@@ -15,6 +16,13 @@ function updateGreetings () {
 function updateMenu () {
   setMenu("Hi! Chill and enjoy coffee as we work on it!")
 }
+
+function updateBot () {
+  const newBot = {...bot};
+  newBot.answer1 = "Come back 5minutes later!";
+  setBot(newBot); 
+
+}
   return (
     <div>
           <h1>{restaurantName}</h1>
@@ -23,6 +31,8 @@ function updateMenu () {
           <button onClick={updateGreetings}>Learn more</button>
           <h1>{menu}</h1>
           <button onClick={updateMenu}>Checkout our Menu!!!</button>
+          <h1>{bot.answer1}</h1>
+          <button onClick={updateBot}>Chat With Us!!</button>
     </div>
   );
 }
