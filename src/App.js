@@ -1,26 +1,48 @@
-import React from "react";
+// import { useState } from "react";
+// import useConsoleLog from "./useConsoleLog";
+
+// function App() {
+//   const [count, setCount] = useState(0);
+//   useConsoleLog(count);
+
+//   function increment() {
+//     setCount(prevCount => prevCount + 1);
+//   }
+
+//   return (
+//     <div>
+//       <h1>Count: {count}</h1>
+//       <button onClick={increment}>Plus 1</button>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+
+
+
+
+
+
+
+
+import { useState,} from 'react';
+import  useConsoleLog  from './useConsoleLog'
 
 function App () {
-  const [user, setUser] = React.useState([])
+  const[count, setCount] = useState(0)
+  useConsoleLog(count)
 
-  const fetchData = () => {
-    fetch("https://randomuser.me/api/?results=1")
-    .then(res => res.json())
-    .then(data => setUser(data));
+  function increment () {
+    setCount(prevCount => prevCount +1)
   }
-
-  React.useEffect(() => {
-    fetchData();
-  }, [])
-
-  return Object.keys(user).length > 0 ? (
-   <div>
-    <h1>Data Returned</h1>
-    <h2>First Name: {user.results[0].name.first}</h2>
-    <h2>Last Name: {user.results[0].name.last}</h2>
-   </div>
-  ) : (
-    <h2>Data Loading...</h2>
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={increment}>Plus 1</button>
+    </div>
   )
 }
 
