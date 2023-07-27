@@ -1,45 +1,32 @@
-import { useState, useRef, useEffect } from 'react'
+const Button = ({children, backgroundColor}) => {
+  return (
+    <button style={backgroundColor}>{children}</button>
+  )
+};
+
+const Alert = ({ children }) => {
+  return (<>
+   <div className="overlay" />
+    <div className="Alert">{children}</div>
+  </> 
+  );
+};
+
+const DeleteButton = () => {
+  return <Button backgroundColor="red">Delete</Button>
+}
 
 function App () {
-  const[day, setDay] = useState("Monday")
-  const prevDay = usePrevious(day);
-  const getNextDay = () => {
-    if(day === "Monday") {
-      setDay("Tuesday");
-    } else if(day === "Tuesday") {
-      setDay("Wednesday")
-    } else if(day === "Wednesday") {
-      setDay("Thursday")
-   }  else if(day === "Thursday") {
-      setDay("Friday")
-    } else if(day === "Friday") {
-      setDay("Saturday")
-    } else if(day === "Saturday") {
-      setDay("Sunday")
-   }
-  }
-  return (
-    <div style={{padding: "40px"}}>
-      <h1>
-        Today is: {day}<br />
-        {
-          prevDay && (
-            <span>Previous work day was: {prevDay}</span>
-          )
-        }
-      </h1>
-      <button onClick={getNextDay}>
-        Get next day
-      </button>
-    </div>
-  );
+return (
+  <div className="App">
+    <header>Little Lemon</header>
+    <Alert>
+      <h2>Delete account</h2>
+      <p>Delete your account and miss all the goodies!!!</p>
+      <DeleteButton />
+    </Alert>
+  </div>
+)
 }
-export default App;
 
-function usePrevious(val) {
-  const ref = useRef();
-  useEffect(() => {
-  ref.current = val;
-     }, [val]);
-  return ref.current;
-  }
+export default App;
